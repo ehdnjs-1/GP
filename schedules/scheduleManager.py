@@ -86,7 +86,7 @@ def add_schedule(day_input, name_input):
 
 # 일정 수정
 def update_schedule(update_index, day_input, name_input):
-    # 매개변수로 받은 update_index 사용해 find_data_index 함수로 원본 id 찾기.
+    # 매개변수로 받은 update_index 사용해 find_data_id 함수로 원본 id 찾기.
     # day_input 또는 name_input가 빈 문자열("")인지 확인 후 
     # 빈 문자열인 매개변수가 존재할 경우 입력된 input 값만 수정
 
@@ -94,7 +94,7 @@ def update_schedule(update_index, day_input, name_input):
 
 # 일정 삭제
 def delete_schedule(delete_index):
-    # 매개변수로 받은 delete_index 사용해서 find_data_index 함수로 원본 id 찾기
+    # 매개변수로 받은 delete_index 사용해서 find_data_id 함수로 원본 id 찾기
     # 찾은 원본 id로 json에서 삭제 처리
 
     print()
@@ -110,7 +110,7 @@ def exists_schedule(index):
     return False
 
 # 일정 원본 id 반환
-def find_data_index(index):
+def find_data_id(index):
     schedules = calculate_d_day()
     selected = schedules[index - 1]
 
