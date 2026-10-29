@@ -1,3 +1,4 @@
+
 from common import commonPrintConsole
 from . import scheduleManager
 
@@ -87,9 +88,10 @@ def update_schedule_guide(update_index):
 
 # 일정 수정 완료
 def update_schedule_complete(update_index, day_input, name_input):
-    scheduleManager.update_schedule(update_index, day_input, name_input)
-    print("🔄 수정 완료")
-
+    if scheduleManager.update_schedule(update_index, day_input, name_input):
+        print("🔄 수정 완료")
+    else:
+        exception_schedule_index()
 
 
 ####################### 일정 삭제 #######################
@@ -115,8 +117,10 @@ def delete_schedule_guide(delete_index):
 
 # 일정 삭제
 def delete_schedule_complete(delete_index):
-    scheduleManager.delete_schedule(delete_index)
-    print("☑️ 삭제 완료되었습니다.")
+    if scheduleManager.delete_schedule(delete_index):
+        print("☑️ 삭제 완료되었습니다.")
+    else:
+        exception_schedule_index()
 
 ####################### 공통 #######################
 
