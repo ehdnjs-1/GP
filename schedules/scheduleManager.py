@@ -108,6 +108,31 @@ def delete_schedule(delete_index):
   else:
     print("❌ 삭제할 일정을 찾을 수 없습니다.")
 
+# 일정 완료 체크
+def complete_schedule(index):
+  # 매개변수로 받은 index를 사용해 find_data_id 함수로 원본 데이터의 실제 인덱스 찾기
+  raw_index = find_data_id(index)
+
+  if raw_index is not None:
+    data = dataManager.load_data()
+
+    # 기존 완료 상태 가져오기 (없으면 기본값 False)
+    current_done = data["schedules"][raw_index].get("done", False)
+
+    # 완료 상태 반전 (True <-> False)
+    data["schedules"][raw_index]["done"] = not current_done
+
+    # 변경된 데이터 JSON 파일에 저장
+    dataManager.save_data(data)
+
+    status_str = "완료" if data["schedules"][raw_index]["done"] else "미완료"
+    print(
+        f"✅ '{data['schedules'][raw_index]['name']}' 일정이 '{status_str}'"
+        " 상태로 변경되었습니다!"
+    )
+  else:
+    print("❌ 해당 일정을 찾을 수 없습니다.")
+
 # 일정 존재 여부 확인
 def exists_schedule(index):
     schedules = calculate_d_day()
