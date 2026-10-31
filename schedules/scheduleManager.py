@@ -94,10 +94,19 @@ def update_schedule(update_index, day_input, name_input):
 
 # 일정 삭제
 def delete_schedule(delete_index):
-    # 매개변수로 받은 delete_index 사용해서 find_data_id 함수로 원본 id 찾기
-    # 찾은 원본 id로 json에서 삭제 처리
+  # 1. 매개변수로 받은 delete_index 사용해서 find_data_id 함수로 원본 id 찾기
+  raw_index = find_data_id(delete_index)
 
-    print()
+  if raw_index is not None:
+    # 2. 찾은 원본 id로 json에서 삭제 처리
+    data = dataManager.load_data()
+    deleted_schedule = data["schedules"].pop(raw_index)
+
+    # 변경된 데이터 저장
+    dataManager.save_data(data)
+    print(f"✅ '{deleted_schedule['name']}' 일정이 성공적으로 삭제되었습니다!")
+  else:
+    print("❌ 삭제할 일정을 찾을 수 없습니다.")
 
 # 일정 존재 여부 확인
 def exists_schedule(index):
